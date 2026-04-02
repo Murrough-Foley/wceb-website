@@ -1,0 +1,176 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "A multi-type web content extraction benchmark with 2,008 pages across 7 page types." } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={`https://webcontentextraction.org${currentPath === '/' ? '/' : currentPath}`} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`https://webcontentextraction.org${currentPath === '/' ? '' : currentPath}`} />
+  <meta property="og:site_name" content="Web Content Extraction Benchmark" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <title>{title}</title>
+  {currentPath === '/' && <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Web Content Extraction Benchmark (WCEB)",
+    "description": "The Web Content Extraction Benchmark is a dataset of 2,008 annotated web pages from 1,613 domains spanning 7 structurally distinct page types. WCEB measures extraction quality across articles, forums, products, collections, listings, documentation, and service pages.",
+    "url": "https://webcontentextraction.org",
+    "sameAs": [
+      "https://github.com/Murrough-Foley/web-content-extraction-benchmark",
+      "https://huggingface.co/datasets/murrough-foley/web-content-extraction-benchmark"
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.19316874",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "creator": {
+      "@type": "Person",
+      "name": "Murrough Foley",
+      "url": "https://murroughfoley.com",
+      "sameAs": [
+        "https://github.com/Murrough-Foley",
+        "https://www.linkedin.com/in/m-foley-seo/"
+      ]
+    },
+    "datePublished": "2026",
+    "keywords": ["web content extraction", "benchmark", "boilerplate removal", "page type classification", "NLP dataset"],
+    "measurementTechnique": "Word-level set-overlap F1 score",
+    "distribution": [
+      {
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://github.com/Murrough-Foley/web-content-extraction-benchmark"
+      },
+      {
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://doi.org/10.5281/zenodo.19316874"
+      }
+    ]
+  })} />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WCEB</a>
+      <div class="nav-links">
+        <a href="/" class:list={[{ active: currentPath === '/' }]}>Leaderboard</a>
+        <a href="/benchmark" class:list={[{ active: currentPath === '/benchmark' }]}>Benchmark</a>
+        <a href="/#paper">Paper</a>
+        <a href="https://github.com/Murrough-Foley/web-content-extraction-benchmark" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>WCEB is released under CC-BY-4.0. Created by <a href="https://murroughfoley.com">Murrough Foley</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #ffffff;
+    --bg-card: #f8f9fa;
+    --bg-hover: #f0f1f3;
+    --border: #e0e0e0;
+    --text: #1a1a2e;
+    --text-dim: #5a5a72;
+    --text-body: #3a3a4e;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+    --font: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .nav {
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo:hover { text-decoration: none; color: var(--accent); }
+
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .nav-links a.active { color: var(--accent); }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+</style>

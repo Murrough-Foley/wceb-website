@@ -1,0 +1,353 @@
+---
+import Base from '../layouts/Base.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+---
+
+<Base title="Web Content Extraction Benchmark - Dataset & Methodology" description="Dataset details, page type taxonomy, annotation methodology, and download links for the Web Content Extraction Benchmark (WCEB).">
+  <header class="page-header">
+    <h1>Web Content Extraction Benchmark</h1>
+    <p class="subtitle">2,008 annotated web pages (1,497 development + 511 held-out test) for evaluating content extraction across 7 structurally distinct page types.</p>
+  </header>
+
+  <article class="prose">
+    <h2>Why WCEB?</h2>
+    <p>Existing content extraction benchmarks focus almost exclusively on news articles. On articles, the top extractors all converge above F1 = 0.90 --- the problem is largely solved. But the web is not just articles.</p>
+    <p>A production web crawler encounters product pages, forums, documentation, marketing pages, and category listings. Each has fundamentally different HTML structure, and heuristics tuned for articles fail on them in predictable ways. WCEB measures what article-only benchmarks cannot.</p>
+  </article>
+
+  <section class="section">
+    <h2>Page Types</h2>
+    <div class="type-grid">
+      <div class="type-card">
+        <h3>Article <span class="count">793 pages</span></h3>
+        <p>Blog posts, news articles, editorials. Single content container with sequential paragraphs. The well-studied case.</p>
+      </div>
+      <div class="type-card">
+        <h3>Forum <span class="count">113 pages</span></h3>
+        <p>Discussion threads with multiple user posts. Extractors that treat comment CSS classes as boilerplate lose the primary content.</p>
+      </div>
+      <div class="type-card">
+        <h3>Service <span class="count">165 pages</span></h3>
+        <p>SaaS marketing pages with content distributed across hero, features, testimonials, pricing, and FAQ sections.</p>
+      </div>
+      <div class="type-card">
+        <h3>Product <span class="count">119 pages</span></h3>
+        <p>E-commerce product pages where descriptions are often in JSON-LD structured data rather than visible DOM elements.</p>
+      </div>
+      <div class="type-card">
+        <h3>Collection <span class="count">117 pages</span></h3>
+        <p>Category and collection pages with product grids, filter panels, and pagination mixed with content descriptions.</p>
+      </div>
+      <div class="type-card">
+        <h3>Listing <span class="count">99 pages</span></h3>
+        <p>Content indexes with repeated card elements --- article lists, course catalogues, review roundups.</p>
+      </div>
+      <div class="type-card">
+        <h3>Documentation <span class="count">91 pages</span></h3>
+        <p>Technical docs with code blocks, sidebar navigation, and version selectors. Spans Sphinx, Rustdoc, MDN, and custom platforms.</p>
+      </div>
+    </div>
+  </section>
+
+  <article class="prose">
+    <h2>Development and Test Splits</h2>
+    <p>The Web Content Extraction Benchmark is split into a 1,497-page development set and a 511-page held-out test set. The test set was constructed from a separate pool of pages, reviewed independently, and never used during any extraction system's development or evaluation-driven tuning. Page type distributions are matched within 4 percentage points between splits.</p>
+  </article>
+
+  <section class="section">
+    <h2>Annotation Methodology</h2>
+    <div class="methodology">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div>
+          <h3>LLM-Assisted Drafting</h3>
+          <p>Main content is auto-generated from the HTML source using Claude, extracting title, author, date, and main content text.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div>
+          <h3>Automated Verification</h3>
+          <p>Scripts verify the generated annotations against the source HTML --- checking encoding, content bounds, JSON schema validity, and structural consistency.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div>
+          <h3>4-Pass Frontier Model Review</h3>
+          <p>Four independent review passes using Claude Opus check content completeness, content boundaries, metadata accuracy, and internal consistency. Each pass compares annotations against the source HTML and applies fixes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div>
+          <h3>Snippet Verification</h3>
+          <p>Automated scripts verify that all <code>with[]</code> snippets appear verbatim in the main content and no <code>without[]</code> snippets are present. A 21-point quality scan checks encoding, boilerplate contamination, metadata plausibility, and cross-reference integrity.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <div>
+          <h3>Human Review</h3>
+          <p>The human annotator reviews all changes from the preceding stages, adjudicates disagreements, and performs final quality assurance on the complete dataset.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="prose">
+    <h2>Ground Truth Format</h2>
+    <p>Each ground truth annotation includes the full main content as plain text, page title, author name, publication date, and two sets of evaluation snippets: <code>with[]</code> snippets that must appear in a correct extraction (testing completeness) and <code>without[]</code> snippets from boilerplate that must not appear (testing precision). Content is never truncated. The longest annotation is 49,617 characters.</p>
+
+    <h2>Evaluation Metric</h2>
+    <p>Extraction quality is measured using word-level set-overlap F1. Extracted text and ground truth are tokenised into word bags (lowercased, splitting on non-alphanumeric characters), and precision, recall, and F1 are computed from word overlap. This metric is insensitive to whitespace and formatting differences while penalising missing or extraneous content. The word-bag approach is consistent with prior extraction benchmarks.</p>
+  </article>
+
+  <section class="section">
+    <h2>Download</h2>
+    <div class="download-grid">
+      <a href="https://github.com/Murrough-Foley/web-content-extraction-benchmark" class="download-card" target="_blank" rel="noopener">
+        <h3>GitHub</h3>
+        <p>Source code, evaluation scripts, and baseline extractor wrappers.</p>
+      </a>
+      <a href="https://doi.org/10.5281/zenodo.19316874" class="download-card" target="_blank" rel="noopener">
+        <h3>Zenodo</h3>
+        <p>Persistent archive with DOI for citation.</p>
+      </a>
+      <a href="https://huggingface.co/datasets/murrough-foley/web-content-extraction-benchmark" class="download-card" target="_blank" rel="noopener">
+        <h3>HuggingFace</h3>
+        <p>Dataset hub for ML/NLP community discovery.</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Citation</h2>
+    <pre class="citation"><code>@article&#123;foley2026wceb,
+  title=&#123;&#123;WCEB&#125;: A Multi-Type Web Content Extraction Benchmark&#125;,
+  author=&#123;Foley, Murrough&#125;,
+  year=&#123;2026&#125;,
+  url=&#123;https://github.com/Murrough-Foley/web-content-extraction-benchmark&#125;,
+  doi=&#123;10.5281/zenodo.19316874&#125;
+&#125;</code></pre>
+  </section>
+
+  <AuthorBox />
+
+  <section class="section license">
+    <p>Released under <strong>CC-BY-4.0</strong>. Free to use for research and commercial purposes with attribution.</p>
+  </section>
+</Base>
+
+<style>
+  .page-header {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .subtitle {
+    color: var(--text-body);
+    font-size: 1.05rem;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  .prose {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+  }
+
+  .prose h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    text-align: center;
+  }
+
+  .prose p {
+    color: var(--text-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .prose code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 0.12rem 0.35rem;
+    border-radius: 3px;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .type-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    background: var(--bg-card);
+  }
+
+  .type-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .count {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .type-card p {
+    color: var(--text-body);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .methodology {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .step h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+
+  .step p {
+    color: var(--text-body);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .download-card {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    background: var(--bg-card);
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+
+  .download-card:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+
+  .download-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--accent);
+  }
+
+  .download-card p {
+    color: var(--text-body);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .citation {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .citation code {
+    background: none;
+    padding: 0;
+    font-family: var(--mono);
+    border: none;
+  }
+
+  .license {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .license p {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+</style>

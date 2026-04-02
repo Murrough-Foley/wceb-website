@@ -1,0 +1,99 @@
+---
+import data from '../data/leaderboard.json';
+const { results } = data.hybrid;
+---
+
+<section class="leaderboard">
+  <h2>{data.hybrid.title}</h2>
+  <p class="desc">{data.hybrid.description}</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="system">System</th>
+          <th class="metric">Dev F1</th>
+          <th class="metric">Test F1</th>
+          <th class="metric">Dev Delta</th>
+          <th class="metric">Test Delta</th>
+          <th class="metric">Routed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {results.map((r, i) => (
+          <tr class:list={[{ highlight: i === 0 }]}>
+            <td class="system">{r.system}</td>
+            <td class="metric">{r.devF1.toFixed(3)}</td>
+            <td class:list={['metric', 'f1', { best: i === 0 }]}>{r.testF1.toFixed(3)}</td>
+            <td class="metric delta">{r.devDelta}</td>
+            <td class="metric delta">{r.testDelta}</td>
+            <td class="metric">{r.routed}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .leaderboard { margin-bottom: 3rem; }
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .desc {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+
+  th {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: var(--bg-hover); }
+
+  tr.highlight td { background: rgba(37, 99, 235, 0.06); }
+
+  .system { font-weight: 500; }
+
+  .metric {
+    font-family: var(--mono);
+    text-align: right;
+    font-size: 0.85rem;
+  }
+
+  .f1.best {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .delta { color: var(--green); }
+</style>

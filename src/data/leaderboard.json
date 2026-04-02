@@ -1,0 +1,56 @@
+{
+  "plainText": {
+    "title": "Development Set Results",
+    "description": "Word-level F1 on the WCEB development set (1,497 pages across 7 page types). F1 is the harmonic mean of precision (P) and recall (R), measured by word-level overlap between extracted and ground truth content.",
+    "metric": "F1",
+    "results": [
+      { "system": "rs-trafilatura", "type": "Rule+ML", "f1": 0.859, "p": 0.863, "r": 0.890, "ms": 44, "url": "https://crates.io/crates/rs-trafilatura" },
+      { "system": "MinerU-HTML (0.6B)", "type": "Neural", "f1": 0.827, "p": 0.845, "r": 0.840, "ms": 1570, "url": "https://github.com/opendatalab/MinerU-HTML" },
+      { "system": "Trafilatura", "type": "Rule", "f1": 0.791, "p": 0.852, "r": 0.793, "ms": 94, "url": "https://github.com/adbar/trafilatura" },
+      { "system": "dom-smoothie", "type": "Rule", "f1": 0.762, "p": 0.806, "r": 0.768, "ms": 27, "url": "https://github.com/nichochar/dom-smoothie" },
+      { "system": "ReaderLM-v2 (1.5B)", "type": "Neural", "f1": 0.741, "p": 0.741, "r": 0.790, "ms": 10410, "url": "https://huggingface.co/jinaai/ReaderLM-v2" },
+      { "system": "dom-content-extraction", "type": "Rule", "f1": 0.731, "p": 0.757, "r": 0.789, "ms": null, "url": null },
+      { "system": "Newspaper4k", "type": "Rule", "f1": 0.720, "p": 0.838, "r": 0.683, "ms": 869, "url": "https://github.com/AndyTheFactory/newspaper4k" },
+      { "system": "magic-html", "type": "Rule", "f1": 0.719, "p": 0.813, "r": 0.713, "ms": null, "url": "https://github.com/opendatalab/magic-html" },
+      { "system": "jusText", "type": "Rule", "f1": 0.707, "p": 0.771, "r": 0.695, "ms": null, "url": "https://github.com/miso-belica/jusText" },
+      { "system": "BoilerPy3", "type": "Rule", "f1": 0.687, "p": 0.795, "r": 0.661, "ms": null, "url": "https://github.com/jmriebold/BoilerPy3" },
+      { "system": "Readability", "type": "Rule", "f1": 0.675, "p": 0.685, "r": 0.713, "ms": 751, "url": "https://github.com/mozilla/readability" },
+      { "system": "Goose3", "type": "Rule", "f1": 0.651, "p": 0.845, "r": 0.593, "ms": null, "url": "https://github.com/goose3/goose3" }
+    ]
+  },
+  "heldOut": {
+    "title": "Held-Out Test Set",
+    "description": "Generalization results on the 511-page held-out set (never used during development).",
+    "metric": "F1",
+    "results": [
+      { "system": "rs-trafilatura", "f1": 0.893, "delta": "+0.034" },
+      { "system": "Trafilatura", "f1": 0.833, "delta": "+0.042" },
+      { "system": "dom-smoothie", "f1": 0.808, "delta": "+0.045" },
+      { "system": "Newspaper4k", "f1": 0.753, "delta": "+0.033" },
+      { "system": "Readability", "f1": 0.726, "delta": "+0.051" },
+      { "system": "Goose3", "f1": 0.687, "delta": "+0.036" }
+    ]
+  },
+  "hybrid": {
+    "title": "Hybrid Pipeline",
+    "description": "rs-trafilatura + MinerU-HTML fallback for low-confidence pages (~8% routed to LLM).",
+    "metric": "F1",
+    "results": [
+      { "system": "Hybrid (rs-traf + MinerU)", "devF1": 0.862, "testF1": 0.910, "devDelta": "+0.003", "testDelta": "+0.017", "routed": "~8%" },
+      { "system": "rs-trafilatura (alone)", "devF1": 0.859, "testF1": 0.893, "devDelta": "baseline", "testDelta": "baseline", "routed": "0%" }
+    ]
+  },
+  "perType": {
+    "title": "Per-Page-Type Breakdown",
+    "description": "F1 on the development set by page type. The gap between article and non-article extraction reveals the blind spot in article-only benchmarks.",
+    "types": [
+      { "type": "Article", "n": 793, "rsTraf": 0.932, "mineru": 0.928, "trafilatura": 0.926, "readerlm": 0.878 },
+      { "type": "Documentation", "n": 91, "rsTraf": 0.931, "mineru": 0.838, "trafilatura": 0.888, "readerlm": 0.776 },
+      { "type": "Service", "n": 165, "rsTraf": 0.843, "mineru": 0.824, "trafilatura": 0.763, "readerlm": 0.703 },
+      { "type": "Forum", "n": 113, "rsTraf": 0.792, "mineru": 0.794, "trafilatura": 0.585, "readerlm": 0.589 },
+      { "type": "Collection", "n": 117, "rsTraf": 0.713, "mineru": 0.506, "trafilatura": 0.553, "readerlm": 0.417 },
+      { "type": "Listing", "n": 99, "rsTraf": 0.704, "mineru": 0.710, "trafilatura": 0.589, "readerlm": 0.559 },
+      { "type": "Product", "n": 119, "rsTraf": 0.670, "mineru": 0.619, "trafilatura": 0.567, "readerlm": 0.463 }
+    ]
+  }
+}

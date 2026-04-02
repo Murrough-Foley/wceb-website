@@ -1,0 +1,148 @@
+---
+interface Result {
+  system: string;
+  type?: string;
+  f1: number;
+  p?: number;
+  r?: number;
+  ms?: number | null;
+  url?: string | null;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  results: Result[];
+  showType?: boolean;
+  showSpeed?: boolean;
+}
+
+const { title, description, results, showType = true, showSpeed = true } = Astro.props;
+---
+
+<section class="leaderboard">
+  <h2>{title}</h2>
+  <p class="desc">{description}</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="rank">#</th>
+          <th class="system">System</th>
+          {showType && <th>Type</th>}
+          <th class="metric">F1</th>
+          {results[0]?.p !== undefined && <th class="metric">P</th>}
+          {results[0]?.r !== undefined && <th class="metric">R</th>}
+          {showSpeed && <th class="metric">ms/page</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {results.map((r, i) => (
+          <tr class:list={[{ highlight: i === 0 }]}>
+            <td class="rank">{i + 1}</td>
+            <td class="system">
+              {r.url ? <a href={r.url} target="_blank" rel="noopener">{r.system}</a> : r.system}
+            </td>
+            {showType && <td class="type-badge"><span class:list={['badge', r.type?.toLowerCase().replace('+', '-')]}>{r.type}</span></td>}
+            <td class="metric f1">{r.f1.toFixed(3)}</td>
+            {r.p !== undefined && <td class="metric">{r.p.toFixed(3)}</td>}
+            {r.r !== undefined && <td class="metric">{r.r.toFixed(3)}</td>}
+            {showSpeed && <td class="metric speed">{r.ms ? r.ms.toLocaleString() : '---'}</td>}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .leaderboard { margin-bottom: 3rem; }
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .desc {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: var(--bg-hover); }
+
+  tr.highlight td { background: rgba(37, 99, 235, 0.06); }
+  tr.highlight .f1 {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .rank {
+    width: 2.5rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+
+  tr.highlight .rank { color: var(--accent); }
+
+  .system { font-weight: 500; }
+  .system a { color: var(--text); }
+  .system a:hover { color: var(--accent); }
+
+  .metric {
+    font-family: var(--mono);
+    text-align: right;
+    font-size: 0.85rem;
+  }
+
+  .f1 { font-weight: 600; }
+
+  .speed { color: var(--text-dim); }
+
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .badge.rule { background: rgba(34, 197, 94, 0.15); color: var(--green); }
+  .badge.neural { background: rgba(37, 99, 235, 0.1); color: var(--accent); }
+  .badge.rule-ml { background: rgba(217, 119, 6, 0.1); color: var(--amber); }
+</style>

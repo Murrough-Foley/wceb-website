@@ -1,0 +1,103 @@
+---
+import data from '../data/leaderboard.json';
+const { types } = data.perType;
+---
+
+<section class="leaderboard">
+  <h2>{data.perType.title}</h2>
+  <p class="desc">{data.perType.description}</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="type-col">Page Type</th>
+          <th class="n">N</th>
+          <th class="metric">rs-trafilatura</th>
+          <th class="metric">MinerU-HTML</th>
+          <th class="metric">Trafilatura</th>
+          <th class="metric">ReaderLM-v2</th>
+        </tr>
+      </thead>
+      <tbody>
+        {types.map((t) => {
+          const best = Math.max(t.rsTraf, t.mineru, t.trafilatura, t.readerlm);
+          return (
+            <tr>
+              <td class="type-col">{t.type}</td>
+              <td class="n">{t.n}</td>
+              <td class:list={['metric', { best: t.rsTraf === best }]}>{t.rsTraf.toFixed(3)}</td>
+              <td class:list={['metric', { best: t.mineru === best }]}>{t.mineru.toFixed(3)}</td>
+              <td class:list={['metric', { best: t.trafilatura === best }]}>{t.trafilatura.toFixed(3)}</td>
+              <td class:list={['metric', { best: t.readerlm === best }]}>{t.readerlm.toFixed(3)}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .leaderboard { margin-bottom: 3rem; }
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .desc {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: var(--bg-hover); }
+
+  .type-col { font-weight: 500; }
+  .n { color: var(--text-dim); text-align: center; font-size: 0.85rem; }
+
+  .metric {
+    font-family: var(--mono);
+    text-align: right;
+    font-size: 0.85rem;
+  }
+
+  .metric.best {
+    color: var(--accent);
+    font-weight: 700;
+  }
+</style>
