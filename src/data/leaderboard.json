@@ -1,7 +1,7 @@
 {
   "plainText": {
     "title": "Development Set Results",
-    "description": "Word-level F1 on the WCEB development set (1,497 pages across 7 page types). F1 is the harmonic mean of precision (P) and recall (R), measured by word-level overlap between extracted and ground truth content.",
+    "description": "Word-level F1 on the WCXB development set (1,497 pages across 7 page types). F1 is the harmonic mean of precision (P) and recall (R), measured by word-level overlap between extracted and ground truth content.",
     "metric": "F1",
     "results": [
       { "system": "rs-trafilatura", "type": "Rule+ML", "f1": 0.859, "p": 0.863, "r": 0.890, "ms": 44, "url": "https://crates.io/crates/rs-trafilatura" },

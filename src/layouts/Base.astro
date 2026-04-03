@@ -29,8 +29,8 @@ const currentPath = Astro.url.pathname;
   {currentPath === '/' && <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Dataset",
-    "name": "Web Content Extraction Benchmark (WCEB)",
-    "description": "The Web Content Extraction Benchmark is a dataset of 2,008 annotated web pages from 1,613 domains spanning 7 structurally distinct page types. WCEB measures extraction quality across articles, forums, products, collections, listings, documentation, and service pages.",
+    "name": "Web Content Extraction Benchmark (WCXB)",
+    "description": "The Web Content Extraction Benchmark is a dataset of 2,008 annotated web pages from 1,613 domains spanning 7 structurally distinct page types. WCXB measures extraction quality across articles, forums, products, collections, listings, documentation, and service pages.",
     "url": "https://webcontentextraction.org",
     "sameAs": [
       "https://github.com/Murrough-Foley/web-content-extraction-benchmark",
@@ -70,7 +70,7 @@ const currentPath = Astro.url.pathname;
 <body>
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">WCEB</a>
+      <a href="/" class="nav-logo">WCXB</a>
       <div class="nav-links">
         <a href="/" class:list={[{ active: currentPath === '/' }]}>Leaderboard</a>
         <a href="/benchmark" class:list={[{ active: currentPath === '/benchmark' }]}>Benchmark</a>
@@ -86,7 +86,7 @@ const currentPath = Astro.url.pathname;
 
   <footer class="footer">
     <div class="footer-inner">
-      <p>WCEB is released under CC-BY-4.0. Created by <a href="https://murroughfoley.com">Murrough Foley</a>.</p>
+      <p>WCXB is released under CC-BY-4.0. Created by <a href="https://murroughfoley.com">Murrough Foley</a>.</p>
     </div>
   </footer>
 </body>

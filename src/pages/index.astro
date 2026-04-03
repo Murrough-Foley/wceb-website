@@ -7,11 +7,11 @@ import AuthorBox from '../components/AuthorBox.astro';
 import data from '../data/leaderboard.json';
 ---
 
-<Base title="Web Content Extraction Benchmark - Leaderboard & Dataset" description="The Web Content Extraction Benchmark (WCEB) is an open dataset of 2,008 web pages across 7 page types. Compare 12 extraction systems on the leaderboard with F1 scores for articles, forums, products, collections, listings, documentation, and service pages.">
+<Base title="Web Content Extraction Benchmark - Leaderboard & Dataset" description="The Web Content Extraction Benchmark (WCXB) is an open dataset of 2,008 web pages across 7 page types. Compare 12 extraction systems on the leaderboard with F1 scores for articles, forums, products, collections, listings, documentation, and service pages.">
   <header class="hero">
     <h1>Web Content Extraction Benchmark</h1>
     <p class="tagline">
-      The Web Content Extraction Benchmark (WCEB) is an open dataset for evaluating how well software extracts the main content from web pages. WCEB contains 2,008 annotated pages (1,497 development + 511 held-out test) and measures extraction quality across 7 structurally distinct page types, revealing performance gaps that article-only benchmarks cannot detect.
+      The Web Content Extraction Benchmark (WCXB) is an open dataset for evaluating how well software extracts the main content from web pages. WCXB contains 2,008 annotated pages (1,497 development + 511 held-out test) and measures extraction quality across 7 structurally distinct page types, revealing performance gaps that article-only benchmarks cannot detect.
     </p>
     <div class="hero-stats">
       <div class="stat">
@@ -67,7 +67,7 @@ import data from '../data/leaderboard.json';
 
     <p><strong>Hybrid systems</strong> try to get the best of both worlds. A heuristic extractor handles every page first. An ML confidence predictor flags the ones it is unsure about, and those get routed to a neural model for a second pass. You get heuristic speed on the 90%+ of pages where it works well, and neural quality on the hard cases.</p>
 
-    <h2 id="the-problem-wceb-solves">The Problem WCEB Solves</h2>
+    <h2 id="the-problem-wcxb-solves">The Problem WCXB Solves</h2>
 
     <p>The Web Content Extraction Benchmark solves the problem of <strong>invisible extraction failures on non-article page types</strong> by providing page-type-stratified evaluation across 7 structurally distinct categories.</p>
 
@@ -84,11 +84,11 @@ import data from '../data/leaderboard.json';
       <li><strong>Listing pages</strong> — repeated card elements where single-node extraction grabs one card instead of the full list.</li>
     </ul>
 
-    <p>These are not tuning problems. They are architectural gaps. An article extractor cannot be tweaked into a good forum extractor — it needs a different strategy. Before WCEB, no benchmark made these gaps visible.</p>
+    <p>These are not tuning problems. They are architectural gaps. An article extractor cannot be tweaked into a good forum extractor — it needs a different strategy. Before WCXB, no benchmark made these gaps visible.</p>
 
-    <h2 id="why-wceb-was-created">Why WCEB Was Created</h2>
+    <h2 id="why-wcxb-was-created">Why WCXB Was Created</h2>
 
-    <p>WCEB was created to address a gap in how web content extraction systems are evaluated. The motivation came from practical work in SEO analysis.</p>
+    <p>WCXB was created to address a gap in how web content extraction systems are evaluated. The motivation came from practical work in SEO analysis.</p>
 
     <p>In SEO, content extraction is used to approximate what search engines see when they evaluate a web page. Google strips away boilerplate to isolate the text that matters for ranking. If you want to understand how Google evaluates content, you need an extraction tool that produces similar output.</p>
 
@@ -96,17 +96,17 @@ import data from '../data/leaderboard.json';
 
     <p>The problem I kept running into was that general-purpose tools worked well on articles but fell apart on the page types that matter most for commercial SEO: product pages, category pages, service pages, and documentation. <strong>Nobody was measuring performance on these page types.</strong> Every benchmark was article-only or mixed-but-unlabelled. Without page-type-specific evaluation, developers had no signal that their tools were failing on a substantial fraction of the web.</p>
 
-    <p>WCEB was built to provide that signal.</p>
+    <p>WCXB was built to provide that signal.</p>
 
-    <h2 id="what-wceb-contains">What WCEB Contains</h2>
+    <h2 id="what-wcxb-contains">What WCXB Contains</h2>
 
     <p>The Web Content Extraction Benchmark contains 2,008 web pages from 1,613 unique domains. Each page is annotated with ground truth content across one of seven page types: <strong>articles</strong> (793 pages), <strong>service pages</strong> (165 pages), <strong>products</strong> (119 pages), <strong>collections</strong> (117 pages), <strong>forums</strong> (113 pages), <strong>listings</strong> (99 pages), and <strong>documentation</strong> (91 pages).</p>
 
-    <p>WCEB is split into a 1,497-page development set and a 511-page held-out test set with matched page type distributions. The held-out set was constructed from a separate pool of pages, reviewed independently, and never used during any extraction system's development. This split allows researchers to develop against the development set while validating that results generalise on the test set.</p>
+    <p>WCXB is split into a 1,497-page development set and a 511-page held-out test set with matched page type distributions. The held-out set was constructed from a separate pool of pages, reviewed independently, and never used during any extraction system's development. This split allows researchers to develop against the development set while validating that results generalise on the test set.</p>
 
     <p>Each ground truth annotation includes the full main content as plain text, page title, author name, publication date, and two sets of evaluation snippets: <code>with[]</code> snippets that must appear in a correct extraction (testing completeness) and <code>without[]</code> snippets from boilerplate that must not appear (testing precision). Evaluation uses word-level set-overlap F1, consistent with prior extraction benchmarks.</p>
 
-    <p>WCEB is released under CC-BY-4.0 and is available on <a href="https://github.com/Murrough-Foley/web-content-extraction-benchmark">GitHub</a>, <a href="https://doi.org/10.5281/zenodo.19316874">Zenodo</a> (with DOI for citation), and <a href="https://huggingface.co/datasets/murrough-foley/web-content-extraction-benchmark">HuggingFace Datasets</a>.</p>
+    <p>WCXB is released under CC-BY-4.0 and is available on <a href="https://github.com/Murrough-Foley/web-content-extraction-benchmark">GitHub</a>, <a href="https://doi.org/10.5281/zenodo.19316874">Zenodo</a> (with DOI for citation), and <a href="https://huggingface.co/datasets/murrough-foley/web-content-extraction-benchmark">HuggingFace Datasets</a>.</p>
 
     <h2 id="what-the-leaderboard-reveals">What the Leaderboard Reveals</h2>
 
@@ -128,11 +128,11 @@ import data from '../data/leaderboard.json';
 
     <p>You might expect that throwing a language model at the problem would fix it. It does not. MinerU-HTML trails the best heuristic on 5 of 7 page types (it narrowly leads on forums and listings). ReaderLM-v2, despite being 2.5 times larger, underperforms three heuristic systems overall. On collections, both neural systems score below every top heuristic.</p>
 
-    <p>The reason is straightforward: these models were trained mostly on article-like content. They inherited the same article bias, just through a different mechanism. A bigger model trained on the same data distribution does not close a distributional gap. What is needed is type-aware training data or type-aware architectures — and WCEB gives you a way to measure whether either approach is actually working.</p>
+    <p>The reason is straightforward: these models were trained mostly on article-like content. They inherited the same article bias, just through a different mechanism. A bigger model trained on the same data distribution does not close a distributional gap. What is needed is type-aware training data or type-aware architectures — and WCXB gives you a way to measure whether either approach is actually working.</p>
 
     <h2 id="hybrid-extraction-pipelines">Hybrid Extraction Pipelines</h2>
 
-    <p>The idea is simple: run the heuristic extractor on everything, check how confident it is in its own output, and send the low-confidence pages to a neural model for a second opinion. On WCEB, about 8% of pages get routed this way, and overall F1 improves without adding meaningful latency to the other 92%.</p>
+    <p>The idea is simple: run the heuristic extractor on everything, check how confident it is in its own output, and send the low-confidence pages to a neural model for a second opinion. On WCXB, about 8% of pages get routed this way, and overall F1 improves without adding meaningful latency to the other 92%.</p>
 
     <p>The catch is that routing has to be page-type-aware. MinerU-HTML helps on articles, forums, and service pages, but actually makes things worse on collections and products. A naive "send everything uncertain to the LLM" strategy backfires. The pipeline needs to know which types benefit from neural fallback and which are better left alone.</p>
   </article>
@@ -142,7 +142,7 @@ import data from '../data/leaderboard.json';
   <article class="prose">
     <h2 id="held-out-test-set">Held-Out Test Set: Generalisation</h2>
 
-    <p>WCEB includes a 511-page held-out test set that was never touched during any system's development. Every system scores higher on it than on the dev set (likely because the held-out annotations went through a more refined pipeline), but the ranking stays the same. The best system on dev is the best system on test. That consistency is what makes the benchmark useful — you can trust that improvements measured on the dev set will hold up.</p>
+    <p>WCXB includes a 511-page held-out test set that was never touched during any system's development. Every system scores higher on it than on the dev set (likely because the held-out annotations went through a more refined pipeline), but the ranking stays the same. The best system on dev is the best system on test. That consistency is what makes the benchmark useful — you can trust that improvements measured on the dev set will hold up.</p>
   </article>
 
   <LeaderboardTable
@@ -164,8 +164,8 @@ import data from '../data/leaderboard.json';
 
   <section class="citation-section">
     <h2>Citation</h2>
-    <pre class="citation"><code>@article&#123;foley2026wceb,
-  title=&#123;&#123;WCEB&#125;: A Multi-Type Web Content Extraction Benchmark&#125;,
+    <pre class="citation"><code>@article&#123;foley2026wcxb,
+  title=&#123;&#123;WCXB&#125;: A Multi-Type Web Content Extraction Benchmark&#125;,
   author=&#123;Foley, Murrough&#125;,
   year=&#123;2026&#125;,
   url=&#123;https://github.com/Murrough-Foley/web-content-extraction-benchmark&#125;,
@@ -175,7 +175,7 @@ import data from '../data/leaderboard.json';
 
   <section id="paper" class="arxiv-notice">
     <h2>Paper & Submissions</h2>
-    <p>The WCEB dataset paper has been written and is ready for submission to arXiv. However, arXiv requires a first-time author in the relevant subject area to obtain an endorsement from an existing arXiv author before they can submit.</p>
+    <p>The WCXB dataset paper has been written and is ready for submission to arXiv. However, arXiv requires a first-time author in the relevant subject area to obtain an endorsement from an existing arXiv author before they can submit.</p>
     <p>If you are an arXiv-endorsed author in cs.IR (Information Retrieval), cs.CL (Computation and Language), or a related area and would be willing to provide an endorsement, I would be very grateful. The paper describes the benchmark methodology, page type taxonomy, annotation pipeline, and baseline results presented on this page.</p>
     <p>If you have built a web content extraction system and want to add it to the leaderboard, I would also welcome your results. The evaluation scripts and instructions are available in the <a href="https://github.com/Murrough-Foley/web-content-extraction-benchmark">GitHub repository</a>.</p>
     <a href="https://www.linkedin.com/in/m-foley-seo/" target="_blank" rel="noopener" class="cta-btn">

@@ -3,16 +3,16 @@ import Base from '../layouts/Base.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 ---
 
-<Base title="Web Content Extraction Benchmark - Dataset & Methodology" description="Dataset details, page type taxonomy, annotation methodology, and download links for the Web Content Extraction Benchmark (WCEB).">
+<Base title="Web Content Extraction Benchmark - Dataset & Methodology" description="Dataset details, page type taxonomy, annotation methodology, and download links for the Web Content Extraction Benchmark (WCXB).">
   <header class="page-header">
     <h1>Web Content Extraction Benchmark</h1>
     <p class="subtitle">2,008 annotated web pages (1,497 development + 511 held-out test) for evaluating content extraction across 7 structurally distinct page types.</p>
   </header>
 
   <article class="prose">
-    <h2>Why WCEB?</h2>
+    <h2>Why WCXB?</h2>
     <p>Existing content extraction benchmarks focus almost exclusively on news articles. On articles, the top extractors all converge above F1 = 0.90 --- the problem is largely solved. But the web is not just articles.</p>
-    <p>A production web crawler encounters product pages, forums, documentation, marketing pages, and category listings. Each has fundamentally different HTML structure, and heuristics tuned for articles fail on them in predictable ways. WCEB measures what article-only benchmarks cannot.</p>
+    <p>A production web crawler encounters product pages, forums, documentation, marketing pages, and category listings. Each has fundamentally different HTML structure, and heuristics tuned for articles fail on them in predictable ways. WCXB measures what article-only benchmarks cannot.</p>
   </article>
 
   <section class="section">
@@ -123,8 +123,8 @@ import AuthorBox from '../components/AuthorBox.astro';
 
   <section class="section">
     <h2>Citation</h2>
-    <pre class="citation"><code>@article&#123;foley2026wceb,
-  title=&#123;&#123;WCEB&#125;: A Multi-Type Web Content Extraction Benchmark&#125;,
+    <pre class="citation"><code>@article&#123;foley2026wcxb,
+  title=&#123;&#123;WCXB&#125;: A Multi-Type Web Content Extraction Benchmark&#125;,
   author=&#123;Foley, Murrough&#125;,
   year=&#123;2026&#125;,
   url=&#123;https://github.com/Murrough-Foley/web-content-extraction-benchmark&#125;,
