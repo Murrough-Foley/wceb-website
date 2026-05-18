@@ -14,19 +14,21 @@ const { types } = data.perType;
           <th class="n">N</th>
           <th class="metric">rs-trafilatura</th>
           <th class="metric">MinerU-HTML</th>
+          <th class="metric">Resiliparse</th>
           <th class="metric">Trafilatura</th>
           <th class="metric">ReaderLM-v2</th>
         </tr>
       </thead>
       <tbody>
         {types.map((t) => {
-          const best = Math.max(t.rsTraf, t.mineru, t.trafilatura, t.readerlm);
+          const best = Math.max(t.rsTraf, t.mineru, t.trafilatura, t.resiliparse, t.readerlm);
           return (
             <tr>
               <td class="type-col">{t.type}</td>
               <td class="n">{t.n}</td>
               <td class:list={['metric', { best: t.rsTraf === best }]}>{t.rsTraf.toFixed(3)}</td>
               <td class:list={['metric', { best: t.mineru === best }]}>{t.mineru.toFixed(3)}</td>
+              <td class:list={['metric', { best: t.resiliparse === best }]}>{t.resiliparse.toFixed(3)}</td>
               <td class:list={['metric', { best: t.trafilatura === best }]}>{t.trafilatura.toFixed(3)}</td>
               <td class:list={['metric', { best: t.readerlm === best }]}>{t.readerlm.toFixed(3)}</td>
             </tr>

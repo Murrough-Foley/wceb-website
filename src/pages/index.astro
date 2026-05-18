@@ -61,7 +61,7 @@ import data from '../data/leaderboard.json';
 
     <p>There are broadly three approaches to web content extraction: rule-based heuristics, neural classification, and hybrid systems that combine both.</p>
 
-    <p><strong>Rule-based heuristic systems</strong> dominate production use. They score DOM elements by text density, paragraph count, link ratio, and CSS class names, then select the highest-scoring element as main content. They are fast — typically under 100ms per page — and need no GPU. The ecosystem here is strong. <a href="https://github.com/adbar/trafilatura">Trafilatura</a>, created by Adrien Barbaresi, is the most widely used Python extraction library and powers large-scale pipelines like FineWeb and RefinedWeb. Mozilla's <a href="https://github.com/mozilla/readability">Readability</a> is the engine behind Firefox's Reader View. <a href="https://github.com/miso-belica/jusText">jusText</a> classifies text blocks by stopword frequency, and <a href="https://github.com/jmriebold/BoilerPy3">BoilerPy3</a> models extraction as sequence labeling over text blocks.</p>
+    <p><strong>Rule-based heuristic systems</strong> dominate production use. They score DOM elements by text density, paragraph count, link ratio, and CSS class names, then select the highest-scoring element as main content. They are fast — typically under 100ms per page — and need no GPU. The ecosystem here is strong. <a href="https://github.com/adbar/trafilatura">Trafilatura</a>, created by Adrien Barbaresi, is the most widely used Python extraction library and powers large-scale pipelines like FineWeb and RefinedWeb. Mozilla's <a href="https://github.com/mozilla/readability">Readability</a> is the engine behind Firefox's Reader View. <a href="https://github.com/miso-belica/jusText">jusText</a> classifies text blocks by stopword frequency, and <a href="https://github.com/jmriebold/BoilerPy3">BoilerPy3</a> models extraction as sequence labeling over text blocks. <a href="https://resiliparse.chatnoir.eu/">Resiliparse</a> from the Webis Group, built in C++/Cython for the ChatNoir search engine, pairs a fast HTML parser with main-content heuristics and is a workhorse for processing Common Crawl at scale.</p>
 
     <p><strong>Neural extraction systems</strong> are a more recent development. <a href="https://github.com/opendatalab/MinerU-HTML">MinerU-HTML</a> from OpenDataLab fine-tunes a Qwen3-0.6B model to label each HTML element as main content or boilerplate — a neat approach that avoids hallucination since the model classifies rather than generates. <a href="https://huggingface.co/jinaai/ReaderLM-v2">ReaderLM-v2</a> from Jina AI takes a different route, using a 1.5B parameter model to convert raw HTML directly into Markdown. Both are impressive, but they need GPU inference and run 36 to 237 times slower than heuristic systems.</p>
 
@@ -162,7 +162,7 @@ import data from '../data/leaderboard.json';
 
   </article>
 
-  <section class="citation-section">
+  <section id="paper" class="citation-section">
     <h2>Citation</h2>
     <pre class="citation"><code>@article&#123;foley2026wcxb,
   title=&#123;&#123;WCXB&#125;: A Multi-Type Web Content Extraction Benchmark&#125;,
@@ -171,16 +171,6 @@ import data from '../data/leaderboard.json';
   url=&#123;https://github.com/Murrough-Foley/web-content-extraction-benchmark&#125;,
   doi=&#123;10.5281/zenodo.19316874&#125;
 &#125;</code></pre>
-  </section>
-
-  <section id="paper" class="arxiv-notice">
-    <h2>Paper & Submissions</h2>
-    <p>The WCXB dataset paper has been written and is ready for submission to arXiv. However, arXiv requires a first-time author in the relevant subject area to obtain an endorsement from an existing arXiv author before they can submit.</p>
-    <p>If you are an arXiv-endorsed author in cs.IR (Information Retrieval), cs.CL (Computation and Language), or a related area and would be willing to provide an endorsement, I would be very grateful. The paper describes the benchmark methodology, page type taxonomy, annotation pipeline, and baseline results presented on this page.</p>
-    <p>If you have built a web content extraction system and want to add it to the leaderboard, I would also welcome your results. The evaluation scripts and instructions are available in the <a href="https://github.com/Murrough-Foley/web-content-extraction-benchmark">GitHub repository</a>.</p>
-    <a href="https://www.linkedin.com/in/m-foley-seo/" target="_blank" rel="noopener" class="cta-btn">
-      Reach out on LinkedIn
-    </a>
   </section>
 
   <AuthorBox />
@@ -290,51 +280,6 @@ import data from '../data/leaderboard.json';
     background: none;
     border: none;
     padding: 0;
-  }
-
-  .arxiv-notice {
-    max-width: 720px;
-    margin: 2rem auto 3rem;
-    padding: 1.75rem;
-    border: 2px solid var(--accent);
-    border-radius: 8px;
-    background: rgba(37, 99, 235, 0.03);
-    text-align: center;
-  }
-
-  .arxiv-notice h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: var(--accent);
-  }
-
-  .arxiv-notice p {
-    color: var(--text-body);
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin-bottom: 0.75rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .arxiv-notice .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.55rem 1.1rem;
-    background: var(--accent);
-    color: white;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    transition: background 0.15s;
-  }
-
-  .arxiv-notice .cta-btn:hover {
-    background: var(--accent-hover);
-    text-decoration: none;
   }
 
   .last-updated {

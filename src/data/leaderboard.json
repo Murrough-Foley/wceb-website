@@ -6,6 +6,7 @@
     "results": [
       { "system": "rs-trafilatura", "type": "Rule+ML", "f1": 0.859, "p": 0.863, "r": 0.890, "ms": 44, "url": "https://crates.io/crates/rs-trafilatura" },
       { "system": "MinerU-HTML (0.6B)", "type": "Neural", "f1": 0.827, "p": 0.845, "r": 0.840, "ms": 1570, "url": "https://github.com/opendatalab/MinerU-HTML" },
+      { "system": "Resiliparse", "type": "Rule", "f1": 0.797, "p": 0.783, "r": 0.863, "ms": 28, "url": "https://resiliparse.chatnoir.eu/" },
       { "system": "Trafilatura", "type": "Rule", "f1": 0.791, "p": 0.852, "r": 0.793, "ms": 94, "url": "https://github.com/adbar/trafilatura" },
       { "system": "dom-smoothie", "type": "Rule", "f1": 0.762, "p": 0.806, "r": 0.768, "ms": 27, "url": "https://github.com/nichochar/dom-smoothie" },
       { "system": "ReaderLM-v2 (1.5B)", "type": "Neural", "f1": 0.741, "p": 0.741, "r": 0.790, "ms": 10410, "url": "https://huggingface.co/jinaai/ReaderLM-v2" },
@@ -25,6 +26,7 @@
     "results": [
       { "system": "rs-trafilatura", "f1": 0.893, "delta": "+0.034" },
       { "system": "Trafilatura", "f1": 0.833, "delta": "+0.042" },
+      { "system": "Resiliparse", "f1": 0.817, "delta": "+0.020" },
       { "system": "dom-smoothie", "f1": 0.808, "delta": "+0.045" },
       { "system": "Newspaper4k", "f1": 0.753, "delta": "+0.033" },
       { "system": "Readability", "f1": 0.726, "delta": "+0.051" },
@@ -44,13 +46,13 @@
     "title": "Per-Page-Type Breakdown",
     "description": "F1 on the development set by page type. The gap between article and non-article extraction reveals the blind spot in article-only benchmarks.",
     "types": [
-      { "type": "Article", "n": 793, "rsTraf": 0.932, "mineru": 0.928, "trafilatura": 0.926, "readerlm": 0.878 },
-      { "type": "Documentation", "n": 91, "rsTraf": 0.931, "mineru": 0.838, "trafilatura": 0.888, "readerlm": 0.776 },
-      { "type": "Service", "n": 165, "rsTraf": 0.843, "mineru": 0.824, "trafilatura": 0.763, "readerlm": 0.703 },
-      { "type": "Forum", "n": 113, "rsTraf": 0.792, "mineru": 0.794, "trafilatura": 0.585, "readerlm": 0.589 },
-      { "type": "Collection", "n": 117, "rsTraf": 0.713, "mineru": 0.506, "trafilatura": 0.553, "readerlm": 0.417 },
-      { "type": "Listing", "n": 99, "rsTraf": 0.704, "mineru": 0.710, "trafilatura": 0.589, "readerlm": 0.559 },
-      { "type": "Product", "n": 119, "rsTraf": 0.670, "mineru": 0.619, "trafilatura": 0.567, "readerlm": 0.463 }
+      { "type": "Article", "n": 793, "rsTraf": 0.932, "mineru": 0.928, "trafilatura": 0.926, "resiliparse": 0.871, "readerlm": 0.878 },
+      { "type": "Documentation", "n": 91, "rsTraf": 0.931, "mineru": 0.838, "trafilatura": 0.888, "resiliparse": 0.883, "readerlm": 0.776 },
+      { "type": "Service", "n": 165, "rsTraf": 0.843, "mineru": 0.824, "trafilatura": 0.763, "resiliparse": 0.815, "readerlm": 0.703 },
+      { "type": "Forum", "n": 113, "rsTraf": 0.792, "mineru": 0.794, "trafilatura": 0.585, "resiliparse": 0.758, "readerlm": 0.589 },
+      { "type": "Collection", "n": 117, "rsTraf": 0.713, "mineru": 0.506, "trafilatura": 0.553, "resiliparse": 0.586, "readerlm": 0.417 },
+      { "type": "Listing", "n": 99, "rsTraf": 0.704, "mineru": 0.710, "trafilatura": 0.589, "resiliparse": 0.620, "readerlm": 0.559 },
+      { "type": "Product", "n": 119, "rsTraf": 0.670, "mineru": 0.619, "trafilatura": 0.567, "resiliparse": 0.608, "readerlm": 0.463 }
     ]
   }
 }
